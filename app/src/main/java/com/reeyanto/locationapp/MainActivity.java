@@ -14,24 +14,23 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.reeyanto.locationapp.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvResult;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private final int locationRequestCode = 3000;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        tvResult = findViewById(R.id.tv_result);
-        Button btnGetLocation = findViewById(R.id.btn_get_location);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        btnGetLocation.setOnClickListener(view -> {
+        binding.btnGetLocation.setOnClickListener(view -> {
             getCurrentLocation();
         });
     }
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, location -> {
-                tvResult.setText(String.valueOf(location.getLatitude()));
+                binding.tvResult.setText(String.valueOf(location.getLatitude()));
             });
         }
     }
