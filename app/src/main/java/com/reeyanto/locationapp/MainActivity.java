@@ -19,9 +19,8 @@ import com.google.android.gms.location.LocationServices;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvResult;
-    private Button btnGetLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    private int locationRequestCode = 3000;
+    private final int locationRequestCode = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvResult = findViewById(R.id.tv_result);
-        btnGetLocation = findViewById(R.id.btn_get_location);
+        Button btnGetLocation = findViewById(R.id.btn_get_location);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         btnGetLocation.setOnClickListener(view -> {
